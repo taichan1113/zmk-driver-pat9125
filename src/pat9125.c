@@ -8,7 +8,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#define DT_DRV_COMPAT pixart_pat912x
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -17,7 +16,6 @@
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/drivers/i2c.h>
 #include <zephyr/input/input.h>
-#include <zephyr/input/input_pat912x.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 #include <zephyr/pm/device.h>
@@ -86,6 +84,15 @@ struct pat912x_data {
 	struct gpio_callback motion_cb;
 };
 
+// Define a custom sign_extend function to avoid conflict with Zephyr's implementation
+static inline int32_t _sign_extend(uint32_t value, uint8_t index) {
+    __ASSERT_NO_MSG(index <= 31);
+
+    uint8_t shift = 31 - index;
+
+    return (int32_t)(value << shift) >> shift;
+}
+
 static void pat912x_motion_work_handler(struct k_work *work)
 {
 	struct pat912x_data *data = CONTAINER_OF(
@@ -120,8 +127,8 @@ static void pat912x_motion_work_handler(struct k_work *work)
 	y |= (val << 8) & 0xf00;
 	x |= (val << 4) & 0xf00;
 
-	x = sign_extend(x, PAT912X_DATA_SIZE_BITS - 1);
-	y = sign_extend(y, PAT912X_DATA_SIZE_BITS - 1);
+	x = _sign_extend(x, PAT912X_DATA_SIZE_BITS - 1);
+	y = _sign_extend(y, PAT912X_DATA_SIZE_BITS - 1);
 
 	if (cfg->invert_x) {
 		x *= -1;
