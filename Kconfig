@@ -1,0 +1,6 @@
+
+menuconfig PAT9125
+    bool "PAT9125 miniature optical navigation sensor"
+  select I2C
+    help
+      Enable PAT9125 miniature optical navigation sensor.

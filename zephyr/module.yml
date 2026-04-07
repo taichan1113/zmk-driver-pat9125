@@ -1,0 +1,6 @@
+name: zmk-driver-pat9125
+build:
+  cmake: .
+  kconfig: Kconfig
+  settings:
+    dts_root: .
