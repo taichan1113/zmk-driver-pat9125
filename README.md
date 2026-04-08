@@ -10,7 +10,10 @@ This driver communicates with the PAT9125 sensor via I2C interface.
 **This module has just been transplanted from Zephyr4.1.**
 Utilization only with ZMK v0.3 is recommended.
 
-And currently, it requires badjeff's [zmk-input-processor-report-rate-limit](https://github.com/badjeff/zmk-input-processor-report-rate-limit) to work smoothly.
+## Acknowledgments
+
+Currently, it requires [badjeff](https://github.com/badjeff)'s [zmk-input-processor-report-rate-limit](https://github.com/badjeff/zmk-input-processor-report-rate-limit) to work smoothly.
+This porting is highly inspired by [sekigon-gonnoc](https://github.com/sekigon-gonnoc)'s [zmk-driver-paw3222](https://github.com/sekigon-gonnoc/zmk-driver-paw3222).
 
 ## Installation
 

@@ -1,6 +1,6 @@
 /*
  * Copyright 2024 Google LLC
- * Modifications Copyright 2025 sekigon-gonnoc
+ * Modifications Copyright 2025 BP
  *
  * Original source code:
  * https://github.com/zephyrproject-rtos/zephyr/blob/main/drivers/input/input_pat912x.c
